@@ -64,9 +64,9 @@ namespace HibernatingRhinos.Services
                 var webinar = new Webinar
                 {
                     Id = ((Google.GData.YouTube.YouTubeEntry)(item)).VideoId,
-                    Name = item.Title.Text,
-                    Description = item.Summary.Text,
-                    DateCreated = item.Published
+                    Title = item.Title.Text,
+                    Summary = item.Summary.Text,
+                    Published = item.Published
                 };
 
                 webinars.Add(webinar);
