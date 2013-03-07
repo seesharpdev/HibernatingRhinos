@@ -4,6 +4,7 @@ using Google.GData.YouTube;
 using Google.GData.Client;
 
 using HibernatingRhinos.Domain.Models;
+using HibernatingRhinos.Infrastructure.Extensions;
 
 namespace HibernatingRhinos.Services
 {
@@ -62,6 +63,21 @@ namespace HibernatingRhinos.Services
                 };
 
                 webinars.Add(webinar);
+            }
+
+            return webinars;
+        }
+
+        public IList<Webinar> FindWebinars(string keyword)
+        {
+            var service = new YouTubeService("HibernatingRhinosExercise");
+            var query = new FeedQuery("https://gdata.youtube.com/feeds/api/videos?q={0}" + keyword);
+            var webinars = new List<Webinar>();
+
+            AtomFeed result = service.Query(query);
+            if (result != null)
+            {
+                webinars = ParseAtomFeed(result);
             }
 
             return webinars;
