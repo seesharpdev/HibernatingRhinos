@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Net.Http;
 
-using HibernatingRhinos.Models;
 using Google.GData.YouTube;
-using Google.GData.Extensions;
 using Google.GData.Client;
+
+using HibernatingRhinos.Domain.Models;
 
 namespace HibernatingRhinos.Services
 {
@@ -14,7 +12,7 @@ namespace HibernatingRhinos.Services
     /// </summary>
     public class WebinarService
     {
-        private string _uri;
+        private readonly string _uri;
         
         public WebinarService()
 	    {
@@ -27,46 +25,40 @@ namespace HibernatingRhinos.Services
         /// <returns>A generic collection of webinars.</returns>
         public IList<Webinar> GetWebinars()
         {
-            var webinars = LoadWebinarsFromYoutube();
+            var webinars = LoadWebinars();
 
             return webinars;
         }
 
-        private IList<Webinar> LoadWebinarsFromYoutube()
+        private IList<Webinar> LoadWebinars()
         {
+            var service = new YouTubeService("HibernatingRhinosExercise");
+            var query = new FeedQuery(_uri);
             var webinars = new List<Webinar>();
 
-            try
+            AtomFeed result = service.Query(query);
+            if (result != null)
             {
-                YouTubeService service = new YouTubeService("HibernatingRhinosExercise");
-                FeedQuery query = new FeedQuery(_uri);
-                AtomFeed result = service.Query(query);
-
-                if (result != null)
-                {
-                    webinars = ParseFeed(result.Entries);
-                }
-            }
-            catch (System.Net.WebException)
-            {
-                throw;
+                webinars = ParseAtomFeed(result);
             }
 
             return webinars;
         }
 
-        private List<Webinar> ParseFeed(AtomEntryCollection atomEntryCollection)
+        private static List<Webinar> ParseAtomFeed(AtomFeed atomFeed)
         {
+            IEnumerable<AtomEntry> atomEntryCollection = atomFeed.Entries;
             var webinars = new List<Webinar>();
 
             foreach (var item in atomEntryCollection)
             {
+                var entry = (YouTubeEntry) item;
                 var webinar = new Webinar
                 {
-                    Id = ((Google.GData.YouTube.YouTubeEntry)(item)).VideoId,
-                    Title = item.Title.Text,
-                    Summary = item.Summary.Text,
-                    Published = item.Published
+                    Id = entry.VideoId,
+                    Title = entry.Title.Text,
+                    Summary = entry.Summary.Text,
+                    Published = entry.Published
                 };
 
                 webinars.Add(webinar);

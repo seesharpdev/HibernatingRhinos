@@ -65,9 +65,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HibernatingRhinos.Models\HibernatingRhinos.Models.csproj">
+    <ProjectReference Include="..\HibernatingRhinos.Infrastructure\HibernatingRhinos.Infrastructure.csproj">
+      <Project>{0DC4FBE5-9DB8-4E0A-A557-E2F4FB7A65CF}</Project>
+      <Name>HibernatingRhinos.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HibernatingRhinos.Models\HibernatingRhinos.Domain.csproj">
       <Project>{c3ddc895-f64d-47c1-b35d-51791a22c706}</Project>
-      <Name>HibernatingRhinos.Models</Name>
+      <Name>HibernatingRhinos.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\HibernatingRhinos.Services\HibernatingRhinos.Services.csproj">
       <Project>{33a262c1-8614-4c19-9233-c6c83ef38a60}</Project>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33A262C1-8614-4C19-9233-C6C83EF38A60}</ProjectGuid>
+    <ProjectGuid>{0DC4FBE5-9DB8-4E0A-A557-E2F4FB7A65CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HibernatingRhinos.Services</RootNamespace>
-    <AssemblyName>HibernatingRhinos.Services</AssemblyName>
+    <RootNamespace>HibernatingRhinos.Infrastructure</RootNamespace>
+    <AssemblyName>HibernatingRhinos.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,19 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.GData.Client">
-      <HintPath>C:\Program Files (x86)\Google\Google Data API SDK\Redist\Google.GData.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Extensions">
-      <HintPath>C:\Program Files (x86)\Google\Google Data API SDK\Redist\Google.GData.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.YouTube">
-      <HintPath>C:\Program Files (x86)\Google\Google Data API SDK\Redist\Google.GData.YouTube.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,21 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WebinarService.cs" />
+    <Compile Include="Domain\Models\IWebinar.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HibernatingRhinos.Infrastructure\HibernatingRhinos.Infrastructure.csproj">
-      <Project>{0DC4FBE5-9DB8-4E0A-A557-E2F4FB7A65CF}</Project>
-      <Name>HibernatingRhinos.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HibernatingRhinos.Models\HibernatingRhinos.Domain.csproj">
-      <Project>{c3ddc895-f64d-47c1-b35d-51791a22c706}</Project>
-      <Name>HibernatingRhinos.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
