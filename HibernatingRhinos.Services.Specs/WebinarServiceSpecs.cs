@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using FluentAssertions;
-using HibernatingRhinos.Infrastructure.Domain.Models;
 using NUnit.Framework;
 
 using HibernatingRhinos.Domain.Models;
@@ -39,5 +38,32 @@ namespace HibernatingRhinos.Services.Specs
             webinars.Should().NotBeNull();
         }
         
+        [Test]
+        public void When_querying_videos_it_should_not_throw()
+        {
+            // Arrange
+            var service = new WebinarService();
+            var keyword = "Raven";
+            // Act
+            Action method = () => service.FindWebinars(keyword);
+
+            // Assert
+            method.ShouldNotThrow();
+        }
+
+        [Test]
+        public void When_querying_videos_it_should_succeed()
+        {
+            // Arrange
+            var service = new WebinarService();
+            var keyword = "Raven";
+            
+            // Act
+            Func<IList<Webinar>> method = () => service.FindWebinars(keyword);
+            var webinars = method.Invoke();
+
+            // Assert
+            webinars.Count.Should().BeGreaterOrEqualTo(1);
+        }
     }
 }
