@@ -4,7 +4,6 @@ using Google.GData.YouTube;
 using Google.GData.Client;
 
 using HibernatingRhinos.Domain.Models;
-using HibernatingRhinos.Infrastructure.Extensions;
 
 namespace HibernatingRhinos.Services
 {
